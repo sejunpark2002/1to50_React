@@ -1,16 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import "./style.css"
 
 function Cell() {
-    return <Container>
+    return  (
+    
+    <div className="Cell-Container">
     number
-    </Container>;
+    </div>
+    );
 }
 
-const Container = styled`
-
-    boarder: 1px solid red;
-
-`
 
 export default Cell;

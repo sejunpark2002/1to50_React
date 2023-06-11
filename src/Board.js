@@ -1,29 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 import Cell from "./Cell"
+import "./style.css"
 
 function Board() {
     return (
-        <Container>
+        <div className="Board-Container">
             <Cell></Cell>
             <Cell></Cell>
             <Cell></Cell>
             <Cell></Cell>
             <Cell></Cell>
-        </Container>
+        </div>
     );
 
 }
 
-const Container = styled.div `
 
-    width: 400px;
-    height: 400px;
-    boarder: 1px solid blue;
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: repeat(5,1fr)
-
-`;
 
 export default Board;

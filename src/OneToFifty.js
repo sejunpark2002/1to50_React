@@ -1,21 +1,18 @@
 import React from "react"
-import styled from "styled-components"
+
+import "./style.css"
 import Board from "./Board"
+
 
 function OneToFifty() {
     return (
-        <Container>
+        <div className="OneToFifty-Container" >
             <Board>
 
             </Board>
-        </Container>
+        </div>
     )
 }
 
-const Container = styled `
-    width: 600px;
-    height: 800px;
-    boarder: 1px solid black;
 
-`
 export default OneToFifty

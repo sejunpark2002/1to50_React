@@ -1,0 +1,28 @@
+.Board-Container {
+    width: 400px;
+    height: 400px;
+    border: 1px solid blue;
+    margin: auto;
+   
+    
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+
+}
+.Cell-Container {
+    border: 1px solid red;
+    text-align: center;
+    
+}
+
+.OneToFifty-Container {
+    width: 600px;
+    height: 800px;
+    border: 1px solid black;
+    
+    
+}
+
+
+
