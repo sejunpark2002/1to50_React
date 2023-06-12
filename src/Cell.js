@@ -1,11 +1,13 @@
 import React from "react";
 import "./style.css"
 
-function Cell() {
+
+
+function Cell({num, handleClick}) {
     return  (
     
-    <div className="Cell-Container">
-    number
+    <div className="Cell-Container" onClick={()=> handleClick(num)} >
+    {num !== 0 ? num : null}
     </div>
     );
 }
