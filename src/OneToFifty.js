@@ -2,6 +2,7 @@ import React, { useState } from "react"
 
 import "./style.css"
 import Board from "./Board"
+import Timer from "./Timer"
 
 let array =[];
 for (let i=1; i <= 25 ; i++) {
@@ -14,7 +15,7 @@ function OneToFifty() {
     const [numbers,setNumbers] = useState(array);
     const [gameFlag,setGameFlag] = useState(false);
     const [current,setCurrent] = useState(1)
-    const [timeElapsed,setTimeElapsed] = useState(0)
+    
 
 
     const handleClick = num => {
@@ -28,7 +29,7 @@ function OneToFifty() {
              
               num < 26 ? num + 25 : 0,
               ...numbers.slice(index + 1),
-              console.log(numbers)
+            //   console.log(numbers)
               
             ]);
             setCurrent(current + 1)
@@ -51,6 +52,12 @@ function OneToFifty() {
     return (
         <div className="OneToFifty-Container" >
             <Board numbers={numbers} handleClick={handleClick}></Board>
+            {gameFlag ? (
+                <Timer />
+            ) : (
+                <button className="Start-Button" onClick={startGame}>Start</button>
+            )
+            }
 
         </div>
     )

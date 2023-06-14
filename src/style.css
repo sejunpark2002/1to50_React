@@ -4,8 +4,10 @@
     border: 1px solid black;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    
+    background-image: url("background.png");
+    background-size: cover;
     
 }
 
@@ -20,14 +22,39 @@
 
 }
 .Cell-Container {
-    border: 1px solid red;
+    border: 3px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
     
 }
 
+.Start-Button {
+    margin-top: 30px;
+    width: 100px;
+    height: 50px;
+}
 
+.Timer-Container {
+    margin-top: 30px;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.Timer-Front {
+    text-align: right;
+}
+
+.Timer-Back {
+    width: 1em;
+}
 
 
