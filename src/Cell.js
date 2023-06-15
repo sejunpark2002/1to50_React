@@ -7,7 +7,10 @@ function Cell({num, handleClick}) {
     return  (
     
     <div className="Cell-Container" onClick={()=> handleClick(num)} >
-    {num !== 0 ? num : null}
+    {num !== 0 ? num : null
+    
+    }
+        
     </div>
     );
 }

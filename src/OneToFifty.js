@@ -1,27 +1,42 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react";
 
 import "./style.css"
 import Board from "./Board"
 import Timer from "./Timer"
+
+
 
 let array =[];
 for (let i=1; i <= 25 ; i++) {
     array.push(i)
 ;}
 
+const shuffleArray = array => {
+    for (let i = array.length - 1; i>0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+
+    }
+    return array
+
+}
+
 
 function OneToFifty() {
     
-    const [numbers,setNumbers] = useState(array);
+    const [numbers,setNumbers] = useState(shuffleArray(array));
     const [gameFlag,setGameFlag] = useState(false);
     const [current,setCurrent] = useState(1)
+ 
     
-
+   
+  
 
     const handleClick = num => {
         if (num === current) {
             if (num === 50 ) {
-                console.log("Success")
+               
+                endGame()
             }
         const index = numbers.indexOf(num)
             setNumbers(numbers => [
@@ -34,43 +49,41 @@ function OneToFifty() {
             ]);
             setCurrent(current + 1)
         }
+
+        setGameFlag(true);
+       
     };
 
     const startGame = () => {
+      
         setNumbers(shuffleArray(array));
         setCurrent(1);
-        setGameFlag(true);
+        
     };
 
     const endGame = () => {
         setGameFlag(false);
     };
 
+  
+  
 
-
+  
 
     return (
+
         <div className="OneToFifty-Container" >
+           
+           <Timer gameFlag={gameFlag} />
+          
             <Board numbers={numbers} handleClick={handleClick}></Board>
-            {gameFlag ? (
-                <Timer />
-            ) : (
-                <button className="Start-Button" onClick={startGame}>Start</button>
-            )
-            }
+           
 
         </div>
     )
 }
 
-const shuffleArray = array => {
-    for (let i = array.length - 1; i>0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
 
-    }
-    return array
 
-}
 
 export default OneToFifty
