@@ -7,29 +7,42 @@ body {
 .OneToFifty-Container {
     margin: auto;
     width: 700px;
-    height: 1000px;
+    height: 900px;
     border: 1px solid black;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     background-image: url("background.png");
     background-size: contain;
     border-radius: 20px;
     
 }
 
+.Outer-Board-Container {
+    width: 620px;
+    height: 440px;
+    background-image: url("woodboard.png");
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+}
+
 
 .Board-Container {
-    width: 400px;
-    height: 400px;
+    width: 380px;
+    height: 380px;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    background-color:rgb(65, 65, 221);
+    /* background-color:rgb(65, 65, 221); */
  
-    border: 3px solid black;
+    
+    /* border: 3px solid black; */
     border-radius: 10%;
     
     
@@ -70,9 +83,12 @@ body {
 
 .Timer-Container {
   
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     width: 100px;
     height: 50px;
+    margin: 100px auto 80px;
+    
+    
     display: flex;
     justify-content: center;
     align-items: center;

@@ -3,10 +3,10 @@ import "./style.css"
 
 
 
-function Cell({num, handleClick}) {
+function Cell({num, handleClick,handleSound}) {
     return  (
     
-    <div className="Cell-Container" onClick={()=> handleClick(num)} >
+    <div className="Cell-Container" onClick={()=> {handleClick(num); handleSound();}} >
     {num !== 0 ? num : null
     
     }

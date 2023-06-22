@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import "./style.css"
-import Board from "./Board"
+import OuterBoard from "./OuterBoard"
 import Timer from "./Timer"
 
 
+const audioFile = require('./sound/carrot_pull.mp3');
+
+const carrotSound = new Audio('./sound/carrot_pull.mp3');
 
 let array =[];
 for (let i=1; i <= 25 ; i++) {
@@ -51,18 +54,33 @@ function OneToFifty() {
         }
 
         setGameFlag(true);
+        
+      
        
     };
+
+    const handleSound = () => {
+        playSound(carrotSound)
+    }
+
+    function playSound(sound) {
+        sound.currentTime = 0;
+        sound.play();
+      }
+
+
 
     const startGame = () => {
       
         setNumbers(shuffleArray(array));
         setCurrent(1);
+      
         
     };
 
     const endGame = () => {
         setGameFlag(false);
+       
     };
 
   
@@ -74,9 +92,9 @@ function OneToFifty() {
 
         <div className="OneToFifty-Container" >
            
-           <Timer gameFlag={gameFlag} />
-          
-            <Board numbers={numbers} handleClick={handleClick}></Board>
+            <Timer gameFlag={gameFlag} />
+            <OuterBoard numbers={numbers} handleClick={handleClick} handleSound={handleSound}> </OuterBoard>
+            {/* <Board numbers={numbers} handleClick={handleClick}></Board> */}
            
 
         </div>
