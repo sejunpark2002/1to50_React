@@ -3,15 +3,18 @@ import "./style.css"
 
 
 
-function Cell({num, handleClick,handleSound}) {
+
+function Cell({num, handleClick}) {
+
+   
     return  (
+     <div>
+            
+            <div className="Cell-Container" onClick={()=> {handleClick(num); }} >
+            {num !== 0 ? num : null}
+            </div>
+     </div>   
     
-    <div className="Cell-Container" onClick={()=> {handleClick(num); handleSound();}} >
-    {num !== 0 ? num : null
-    
-    }
-        
-    </div>
     );
 }
 

@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import "./style.css"
 import OuterBoard from "./OuterBoard"
 import Timer from "./Timer"
+import clickSound from './sound/carrot_pull.mp3';
 
 
-const audioFile = require('./sound/carrot_pull.mp3');
 
-const carrotSound = new Audio('./sound/carrot_pull.mp3');
+
 
 let array =[];
 for (let i=1; i <= 25 ; i++) {
@@ -31,11 +31,12 @@ function OneToFifty() {
     const [gameFlag,setGameFlag] = useState(false);
     const [current,setCurrent] = useState(1)
  
-    
+    const audioRef = useRef(null);
    
   
 
     const handleClick = num => {
+        
         if (num === current) {
             if (num === 50 ) {
                
@@ -51,18 +52,17 @@ function OneToFifty() {
               
             ]);
             setCurrent(current + 1)
+           
         }
 
         setGameFlag(true);
+        audioRef.current.play();
         
       
        
     };
 
-    const handleSound = () => {
-        playSound(carrotSound)
-    }
-
+  
     function playSound(sound) {
         sound.currentTime = 0;
         sound.play();
@@ -70,8 +70,7 @@ function OneToFifty() {
 
 
 
-    const startGame = () => {
-      
+    const startGame = () => {      
         setNumbers(shuffleArray(array));
         setCurrent(1);
       
@@ -90,10 +89,13 @@ function OneToFifty() {
 
     return (
 
+    
+
         <div className="OneToFifty-Container" >
            
+           <audio ref={audioRef} src={clickSound}></audio>
             <Timer gameFlag={gameFlag} />
-            <OuterBoard numbers={numbers} handleClick={handleClick} handleSound={handleSound}> </OuterBoard>
+            <OuterBoard numbers={numbers} handleClick={handleClick} > </OuterBoard>
             {/* <Board numbers={numbers} handleClick={handleClick}></Board> */}
            
 
