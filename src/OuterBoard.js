@@ -5,7 +5,7 @@ import "./style.css"
 function OuterBoard({numbers,handleClick}) {
     return (
         <div className="Outer-Board-Container">
-            <Board numbers={numbers} handleClick={handleClick} ></Board>
+            <Board numbers={numbers}  handleClick={handleClick} ></Board>
         </div>
     );
 
