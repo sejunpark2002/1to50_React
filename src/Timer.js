@@ -30,6 +30,7 @@ function Timer({gameFlag,timeElapsed}) {
       
       
         <div className="Timer-Container">
+          {/* <div className="Timer-Minute">{Math.floor(timeElapsed / 1000)/60}:</div> */}
           <div className="Timer-Front">{Math.floor(timeElapsed / 1000)}:</div>
           <div className="Timer-Back">{(timeElapsed % 1000) / 10}</div>
         </div>

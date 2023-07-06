@@ -17,12 +17,20 @@ for (let i=1; i <= 25 ; i++) {
     array.push(i)
 ;}
 
+const shuffleArray = array => {
+    for (let i = array.length - 1; i>0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
 
+    }
+    return array
+
+}
 
 function OneToFifty() {
     
-    const [numbers,setNumbers] = useState(shuffleArray(array));
-    const [gameFlag,setGameFlag] = useState(false);
+    const [numbers, setNumbers] = useState(shuffleArray(array));
+    // const [gameFlag,setGameFlag] = useState(false);
     const [current,setCurrent] = useState(1);
 
     const audioRef = useRef(null);
@@ -34,24 +42,25 @@ function OneToFifty() {
     
     const record = useRef();
     record.current = timeElapsed;
+
+    let gameFlag = false;
    
   
-
     const handleClick = num => {
-        const timer = setInterval(() => {
-         setTimeElapsed(timeElapsed => timeElapsed + 30);
-          }, 30);
+        // const timer = setInterval(() => {
+        //  setTimeElapsed(timeElapsed => timeElapsed + 30);
+        //   }, 30);
 
         if (num === current ) {
-            audioRef.current.play(); 
-          
+            startGame()
             if (num === 50 ) {
-               
-               
                 endGame();
-                clearInterval(timer);
+                // clearInterval(timer);
               
             }
+
+           
+           
         const index = numbers.indexOf(num)
             setNumbers(numbers => [
               ...numbers.slice(0,index) ,
@@ -64,18 +73,10 @@ function OneToFifty() {
             setCurrent(current + 1)
             //  audioRef.current.play();
            
-        } else {
+        }  if (num != current) {
             bugRef.current.play();
-        }
-         if (num ===1) {
-            setGameFlag(true)
-            startGame()
             
-        } 
-
-        // setGameFlag(true);
-        // {num === current ? clickSound : failSound}
-        
+        }
 
         
     };
@@ -91,7 +92,7 @@ function OneToFifty() {
       
      
         winRef.current.play();
-        setGameFlag(false);
+        gameFlag = false
         alert(record.current/1000);
         bgRef.current.pause();
       
@@ -99,23 +100,13 @@ function OneToFifty() {
     };
 
     const startGame = () => {
-      
+        gameFlag = true;
         audioRef.current.play(); 
         bgRef.current.play();
-        
-      
-      
-       
+           
     };
 
-  
-  
-
-
-
-    return (
-
-        
+return (
 
         <div className="OneToFifty-Container" >
              <audio ref={bgRef} src={bgSound}></audio>
@@ -125,7 +116,7 @@ function OneToFifty() {
              <button onClick={stopSounds}>Stop Sounds</button>
 
              {gameFlag ? (
-         <Timer gameFlag={gameFlag} timeElapsed={timeElapsed} />
+         <Timer  timeElapsed={timeElapsed} />
       ) : (
         <TimerZero />
       )}
@@ -140,15 +131,7 @@ function OneToFifty() {
     )
 }
 
-const shuffleArray = array => {
-    for (let i = array.length - 1; i>0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
 
-    }
-    return array
-
-}
 
 
 

@@ -5,6 +5,7 @@ function TimerZero() {
     return (
 
     <div className="Timer-Container">
+        <div className="Timer-Minute">00:</div>
         <div className="Timer-Front">00:</div>
         <div className="Timer-Back">00</div>
     </div>

@@ -89,7 +89,7 @@ body {
 .Timer-Container {
   
     /* margin-bottom: 30px; */
-    width: 100px;
+    width: 120px;
     height: 50px;
     margin: 100px auto 80px;
     
@@ -103,6 +103,9 @@ body {
     border: 3px solid black;
 }
 
+.Timer-Minute {
+
+}
 .Timer-Front {
     text-align: right;
 }
