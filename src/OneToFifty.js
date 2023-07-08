@@ -30,7 +30,11 @@ const shuffleArray = array => {
 function OneToFifty() {
     
     const [numbers, setNumbers] = useState(shuffleArray(array));
-    // const [gameFlag,setGameFlag] = useState(false);
+    const [gameFlag,setGameFlag] = useState(false);
+    const [soundOn, setSoundOn] = useState(true);
+    const [result, setResult] = useState(0);
+
+   
     const [current,setCurrent] = useState(1);
 
     const audioRef = useRef(null);
@@ -38,12 +42,11 @@ function OneToFifty() {
     const winRef = useRef(null);
     const bugRef = useRef(null);
 
-    const [timeElapsed, setTimeElapsed] = useState(0);
-    
-    const record = useRef();
-    record.current = timeElapsed;
 
-    let gameFlag = false;
+
+  
+
+    // let gameFlag = false;
    
   
     const handleClick = num => {
@@ -51,60 +54,63 @@ function OneToFifty() {
         //  setTimeElapsed(timeElapsed => timeElapsed + 30);
         //   }, 30);
 
-        if (num === current ) {
-            startGame()
+        if (num === current && soundOn ) {
+            audioRef.current.play(); 
             if (num === 50 ) {
                 endGame();
-                // clearInterval(timer);
-              
-            }
+                
+              }
 
-           
-           
-        const index = numbers.indexOf(num)
+           const index = numbers.indexOf(num)
             setNumbers(numbers => [
               ...numbers.slice(0,index) ,
              
               num < 26 ? num + 25 : 0,
               ...numbers.slice(index + 1),
-            //   console.log(numbers)
-              
-            ]);
-            setCurrent(current + 1)
-            //  audioRef.current.play();
+       ]);
+            
+       setCurrent(current + 1)
+          
            
-        }  if (num != current) {
+        }  if (num != current && soundOn) {
             bugRef.current.play();
             
+        } else if (num ===1) {
+            startGame()
         }
 
         
     };
 
-    const stopSounds = () => {
-      
+    const stopSound = () => {
+    
+        setSoundOn(false)
+        
+            bgRef.current.pause();
+            bugRef.current.pause();
+            audioRef.current.pause()
+        
+        // soundOn.current = !soundOn.current
+        // console.log(soundOn.current)
+      };
+ const reStart = () => {
+    window.location.reload(false);
+ }
+    const endGame = () => {
+       winRef.current.play();
+        setGameFlag(false)
         bgRef.current.pause();
-        audioRef.current.pause(); 
-        bugRef.current.pause();
       };
 
-    const endGame = () => {
-      
-     
-        winRef.current.play();
-        gameFlag = false
-        alert(record.current/1000);
-        bgRef.current.pause();
-      
-       
-    };
-
     const startGame = () => {
-        gameFlag = true;
-        audioRef.current.play(); 
-        bgRef.current.play();
-           
-    };
+        // gameFlag = true;
+        setGameFlag(true)
+        if (soundOn) { bgRef.current.play();}
+        };
+
+    const showResult = (result) => {
+        setResult(result);
+    }
 
 return (
 
@@ -113,13 +119,19 @@ return (
              <audio ref={audioRef} src={clickSound}></audio>
              <audio ref={winRef} src={winSound}></audio>
              <audio ref={bugRef} src={bugSound}></audio>
-             <button onClick={stopSounds}>Stop Sounds</button>
+             <button onClick={stopSound}>Stop Sound</button>
+             <button onClick={reStart}>Rstart</button>
+             <button>{result}</button>
 
+        <Timer gameFlag={gameFlag} showResult={showResult} />
+        
+{/* 
              {gameFlag ? (
-         <Timer  timeElapsed={timeElapsed} />
+         <Timer/>
       ) : (
         <TimerZero />
       )}
+      */}
 
 
           
