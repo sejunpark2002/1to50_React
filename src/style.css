@@ -1,34 +1,61 @@
+html {
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 body {
+    
     text-align: center;
     background-color: black;
+    margin: 0;
     
   }
 
 .OneToFifty-Container {
     margin: auto;
-    width: 700px;
-    height: 900px;
+    width: 100vw;
+    height: 100vh;
     border: 1px solid black;
-    /* display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center; */
+    position: relative;
     background-image: url("background.png");
+    background-size:cover;
+
+  
+    
+}
+
+.OneToFifty-Container-Overlay {
+    width: vw;
+    height: 100vh;
+    margin: auto;
+
+    border: 1px solid black;
+    position: relative;
+    background: url("background.png") rgba(36, 0, 0, 0.8);
+    background-blend-mode: multiply;
     background-size: contain;
     border-radius: 20px;
     
 }
 
 .Outer-Board-Container {
-    width: 620px;
-    height: 440px;
-    background-image: url("woodboard.png");
+    width: 100%;
+    /* height: 100%; */
+    /* background-image: url("woodboard.png"); */
     background-size: contain;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    /* margin: 20px auto; */
 
+}
+.Outer-Board-Container-Overlay {
+    width: 100%;
+    
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 
@@ -50,24 +77,27 @@ body {
  
 
 }
+
+.Board-Container-Overlay {
+ display: none;
+}
 .Cell-Container {
     
     margin: 5px;
   
-    display: flex;
-    
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
+   
+    font-size: 4rem;
     font-weight:800;
     cursor: pointer;
-    background-color: #f4cd09;
-    color: white;
-    /* -webkit-text-stroke: 2px rgb(180, 105, 0); */
-    box-shadow: 5px 5px 4px 0px rgba(185, 77, 14, 1), inset 5px 5px 4px 0px rgb(214, 229, 81);
-    text-shadow: 3px 3px 3px rgba(185, 77, 14, 1);
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-     border-radius: 50%;
+    background-color:#FF9101;
+    box-shadow: 0 7px  #843a05; 
+    color: rgb(255, 255, 255);
+    
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 7px;
     
 
     
@@ -75,37 +105,63 @@ body {
     
 }
 
-.Start-Button {
-    margin-top: 30px;
-    width: 100px;
-    height: 50px;
+.btn {
+   
+        text-align: center;
+        outline: none;
+        border: none;
+        font-size: 1.5rem ;
+        /* display: inline-block; */
+        margin: 5px 5px 5px 5px ; 
+        font-weight: bold;
+        padding: 10px 10px 10px 10px ;
+        background-color: #FCD24F;
+        
+        color: black;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -o-border-radius: 7px;
+        border-radius: 7px;
+        box-shadow: 0 7px  #EA8439; 
+        cursor: pointer;
+      
 }
-.Audio-Btn {
-    width: 100px;
-    margin: 10px auto 10px;
-    border: 3px solid black;
+
+.btn:hover {
+    background-color: #FCDB72;
+  
 }
+
+.btn:active {
+    background-color: #FCDB72;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.btn-overlay {
+    display: none;
+}
+
+
 
 .Timer-Container {
   
     /* margin-bottom: 30px; */
-    width: 120px;
+    width: 125px;
     height: 50px;
-    margin: 100px auto 80px;
+    margin: 100px auto 20px;
     
     
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 3rem;
     border-radius: 10px;
     background-color: white;
     border: 3px solid black;
 }
 
-.Timer-Minute {
 
-}
 .Timer-Front {
     text-align: right;
 }
@@ -113,5 +169,70 @@ body {
 .Timer-Back {
     width: 1em;
 }
+
+.Scoreboard {
+    
+    width: 80%;
+    height: 80%;
+    margin: auto;
+
+ 
+    background-image: url("./img/scoreboard.png");
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* position:absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+
+  
+   
+    color: black;
+    
+
+
+    /* transform: translateY(-150%); */
+   
+}
+
+.Result {
+    
+    width: 50%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+
+   
+
+ 
+}
+
+.Result-Score {
+display: block;
+font-size: 5rem;
+
+}
+
+btn-playagin {
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 767px) {
+    .Result-Score {
+        font-size: 2.5rem;
+    }
+  }
+  /* TABLET */
+  @media screen and (min-width: 767px) and (max-width: 992px) {
+    .Result-Score { 
+        font-size: 3.5rem;
+    }
+  }
+
+
 
 

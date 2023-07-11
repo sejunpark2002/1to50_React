@@ -2,11 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import "./style.css"
 
 
-function Timer({gameFlag,showResult}) {
+function Timer({gameFlag,showResult,gameOver}) {
     const [timeElapsed, setTimeElapsed] = useState(0);
-    // const [time, setTime] = useState(0);
     const record = useRef();
     record.current = timeElapsed;
+    
+
+
+    const minutes = Math.floor((record.current % 360000) / 6000);
+    const seconds = Math.floor((record.current % 6000) / 100);
+    const milliseconds = record.current % 100;
+
+    const minStrig = minutes.toString().padStart(2, "0");
+    const secString = seconds.toString().padStart(2, "0");
+    const millisecString = milliseconds.toString().padStart(2, "0");
+
 
     useEffect(() => {
    
@@ -19,29 +29,23 @@ function Timer({gameFlag,showResult}) {
 
       }
         return () => {
-          // alert("Your Record :" + record.current / 1000);
+  
           clearInterval(timer);
-          showResult(record.current/1000)
+          showResult(minStrig+":"+secString+":"+millisecString)
         }
         
     }, [gameFlag,timeElapsed]);
 
-    const minutes = Math.floor((timeElapsed % 360000) / 6000);
-
-    // Seconds calculation
-    const seconds = Math.floor((timeElapsed % 6000) / 100);
-  
-    // Milliseconds calculation
-    const milliseconds = timeElapsed % 100;
+    
 
     return (
      <div >
       
       
-        { <div className="Timer-Container">
-          <div className="Timer-Minute">{minutes.toString().padStart(2, "0")}:</div>
-          <div className="Timer-Front">{seconds.toString().padStart(2, "0")}:</div>
-          <div className="Timer-Back"> {milliseconds.toString().padStart(2, "0")}</div>
+        { <div className={gameOver? '' : 'Timer-Container'}>
+          <div className="Timer-Minute">{minStrig}:</div>
+          <div className="Timer-Front">{secString}:</div>
+          <div className="Timer-Back"> {millisecString}</div>
         </div> }
 
      

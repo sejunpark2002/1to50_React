@@ -2,9 +2,9 @@ import React from "react";
 import Cell from "./Cell"
 import "./style.css"
 
-function Board({numbers,handleClick}) {
+function Board({numbers,handleClick,gameOver}) {
     return (
-        <div className="Board-Container">
+        <div className={gameOver? 'Board-Container-Overlay ' : 'Board-Container'}>
 
             {numbers.map( (num,index) => 
             ( <Cell num={num} key={index} handleClick={handleClick} ></Cell>  
@@ -19,3 +19,4 @@ function Board({numbers,handleClick}) {
 
 
 export default Board;
+

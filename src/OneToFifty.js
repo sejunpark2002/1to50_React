@@ -3,9 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import "./style.css"
 import OuterBoard from "./OuterBoard"
 import Timer from "./Timer"
+import ScoreBoard from "./ScoreBoard";
 import clickSound from './sound/carrot_pull.mp3';
 import bgSound from './sound/bg.mp3';
-import TimerZero from "./TimerZero";
 import winSound from './sound/game_win.mp3';
 import bugSound from './sound/bug_pull.mp3';
 
@@ -24,15 +24,18 @@ const shuffleArray = array => {
 
     }
     return array
-
 }
 
 function OneToFifty() {
     
-    const [numbers, setNumbers] = useState(shuffleArray(array));
+    const [numbers, setNumbers] = useState(array);
     const [gameFlag,setGameFlag] = useState(false);
+
+  
+   
     const [soundOn, setSoundOn] = useState(true);
-    const [result, setResult] = useState(0);
+    const [result, setResult] = useState("");
+    const [gameOver,setGameOver] = useState(false);
 
    
     const [current,setCurrent] = useState(1);
@@ -42,27 +45,20 @@ function OneToFifty() {
     const winRef = useRef(null);
     const bugRef = useRef(null);
 
-
-
-  
-
-    // let gameFlag = false;
-   
-  
+    useEffect(() => {
+        setNumbers(shuffleArray(array));
+      }, []);
     const handleClick = num => {
-        // const timer = setInterval(() => {
-        //  setTimeElapsed(timeElapsed => timeElapsed + 30);
-        //   }, 30);
-
+      
         if (num === current && soundOn ) {
             audioRef.current.play(); 
             if (num === 50 ) {
                 endGame();
-                
-              }
+             }
 
-           const index = numbers.indexOf(num)
-            setNumbers(numbers => [
+        const index = numbers.indexOf(num)
+        
+        setNumbers(numbers => [
               ...numbers.slice(0,index) ,
              
               num < 26 ? num + 25 : 0,
@@ -75,11 +71,10 @@ function OneToFifty() {
         }  if (num != current && soundOn) {
             bugRef.current.play();
             
-        } else if (num ===1) {
+        } else if (num === 1) {
             startGame()
-        }
-
-        
+            
+        } 
     };
 
     const stopSound = () => {
@@ -90,64 +85,58 @@ function OneToFifty() {
             bugRef.current.pause();
             audioRef.current.pause()
         
-        // soundOn.current = !soundOn.current
-        // console.log(soundOn.current)
       };
+
  const reStart = () => {
     window.location.reload(false);
  }
     const endGame = () => {
        winRef.current.play();
         setGameFlag(false)
+      
+        setGameOver(true)
         bgRef.current.pause();
       };
 
     const startGame = () => {
-        // gameFlag = true;
+       
         setGameFlag(true)
+
+     
         if (soundOn) { bgRef.current.play();}
         };
 
     const showResult = (result) => {
         setResult(result);
-    }
+    } 
 
 return (
-
-        <div className="OneToFifty-Container" >
+    
+        <div className={gameOver? 'OneToFifty-Container-Overlay' : 'OneToFifty-Container'} >
              <audio ref={bgRef} src={bgSound}></audio>
              <audio ref={audioRef} src={clickSound}></audio>
              <audio ref={winRef} src={winSound}></audio>
              <audio ref={bugRef} src={bugSound}></audio>
-             <button onClick={stopSound}>Stop Sound</button>
-             <button onClick={reStart}>Rstart</button>
-             <button>{result}</button>
 
-        <Timer gameFlag={gameFlag} showResult={showResult} />
-        
-{/* 
-             {gameFlag ? (
-         <Timer/>
-      ) : (
-        <TimerZero />
-      )}
-      */}
-
-
+    
           
-            <OuterBoard numbers={numbers} handleClick={handleClick} > </OuterBoard>
-            {/* <Board numbers={numbers} handleClick={handleClick}></Board> */}
-           
-
+       
+        <Timer gameOver={gameOver} gameFlag={gameFlag} showResult={showResult} />
+        <button  className={gameOver? 'btn-overlay ' : 'btn'} onClick={stopSound}>STOP SOUND</button>
+        <button className={gameOver? 'btn-overlay ' : 'btn'} onClick={reStart}>RESTART</button>
+        <OuterBoard numbers={numbers} handleClick={handleClick} gameOver={gameOver} > </OuterBoard>
+        
+        {gameOver ? (
+        <ScoreBoard result={result} />
+      ) : (
+        null
+      )}
+          
+     
+        
         </div>
     )
 }
-
-
-
-
-
-
 
 export default OneToFifty
 
