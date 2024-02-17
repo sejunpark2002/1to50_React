@@ -3,15 +3,18 @@ import "./style.css"
 
 function Result({result}) {
 
-    const reeStart = () => {
+    const reStart = () => {
         window.location.reload(false);
      }
+
+     
     return (
         <div className="Result">
             <div className="Result-Score"> YOUR SCORE:</div>
             <div className="Result-Score">{result}</div>
             
-           <button className="btn btn-playagin" onClick={reeStart}>PLAY AGAIN</button>
+           <button className="btb btn-playagin" onClick={reStart}>PLAY AGAIN</button>
+           
         </div>
     );
 

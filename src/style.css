@@ -16,8 +16,9 @@ body {
     height: 100vh;
     border: 1px solid black;
     position: relative;
-    background-image: url("background.png");
+    background-image: url("background1.png");
     background-size:cover;
+
 
   
     
@@ -35,6 +36,17 @@ body {
     background-size: contain;
     border-radius: 20px;
     
+}
+
+.title {
+    color: white;
+    font-size: 4rem;
+}
+.Social-Icon {
+ width: 100%;
+}
+.Social-Icon-Overlay {
+display: none;
 }
 
 .Outer-Board-Container {
@@ -93,8 +105,7 @@ body {
     box-shadow: 0 7px  #843a05; 
     color: rgb(255, 255, 255);
     
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+
 
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     border-radius: 7px;
@@ -146,10 +157,10 @@ body {
 
 .Timer-Container {
   
-    /* margin-bottom: 30px; */
+   
     width: 125px;
     height: 50px;
-    margin: 100px auto 20px;
+    margin: 20px auto;
     
     
     display: flex;
@@ -225,6 +236,29 @@ btn-playagin {
     .Result-Score {
         font-size: 2.5rem;
     }
+
+    .Timer-Container {
+  
+     
+        margin: 10px auto 20px;
+        
+    
+     
+    }
+
+    .Timer-Container {
+  
+   
+        width: 100px;
+        height: 25px;
+     
+        
+      
+        font-size: 2rem;
+    
+     
+    }
+    
   }
   /* TABLET */
   @media screen and (min-width: 767px) and (max-width: 992px) {

@@ -21,13 +21,16 @@ const shuffleArray = array => {
     for (let i = array.length - 1; i>0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
-
     }
     return array
 }
 
+shuffleArray(array);
+
+
 function OneToFifty() {
     
+   
     const [numbers, setNumbers] = useState(array);
     const [gameFlag,setGameFlag] = useState(false);
 
@@ -45,16 +48,16 @@ function OneToFifty() {
     const winRef = useRef(null);
     const bugRef = useRef(null);
 
-    useEffect(() => {
-        setNumbers(shuffleArray(array));
-      }, []);
+   
+
     const handleClick = num => {
       
-        if (num === current && soundOn ) {
+        if (num === current ) {
             audioRef.current.play(); 
             if (num === 50 ) {
                 endGame();
              }
+
 
         const index = numbers.indexOf(num)
         
@@ -68,14 +71,14 @@ function OneToFifty() {
        setCurrent(current + 1)
           
            
-        }  if (num != current && soundOn) {
+        }  if (num !== current) {
             bugRef.current.play();
             
         } else if (num === 1) {
             startGame()
             
         } 
-    };
+     };
 
     const stopSound = () => {
     
@@ -109,29 +112,34 @@ function OneToFifty() {
     const showResult = (result) => {
         setResult(result);
     } 
+    
+
+  
+
+    
+  
 
 return (
     
         <div className={gameOver? 'OneToFifty-Container-Overlay' : 'OneToFifty-Container'} >
-             <audio ref={bgRef} src={bgSound}></audio>
-             <audio ref={audioRef} src={clickSound}></audio>
-             <audio ref={winRef} src={winSound}></audio>
-             <audio ref={bugRef} src={bugSound}></audio>
-
-    
-          
-       
-        <Timer gameOver={gameOver} gameFlag={gameFlag} showResult={showResult} />
-        <button  className={gameOver? 'btn-overlay ' : 'btn'} onClick={stopSound}>STOP SOUND</button>
-        <button className={gameOver? 'btn-overlay ' : 'btn'} onClick={reStart}>RESTART</button>
-        <OuterBoard numbers={numbers} handleClick={handleClick} gameOver={gameOver} > </OuterBoard>
+            
+            <audio ref={bgRef} src={bgSound}></audio>
+            <audio ref={audioRef} src={clickSound}></audio>
+            <audio ref={winRef} src={winSound}></audio>
+            <audio ref={bugRef} src={bugSound}></audio>
         
+        <h1 className="title">1to50</h1>     
+        <Timer gameOver={gameOver} gameFlag={gameFlag} showResult={showResult}  />
+        <button  className={gameOver? 'btn-overlay ' : 'btn'} onClick={stopSound}>STOP MUSIC</button>
+        <button className={gameOver? 'btn-overlay ' : 'btn'} onClick={reStart}>NEW GAME</button>
+
+        <OuterBoard numbers={numbers} handleClick={handleClick} gameOver={gameOver} > </OuterBoard>
         {gameOver ? (
         <ScoreBoard result={result} />
       ) : (
         null
       )}
-          
+      <div class="sharethis-inline-share-buttons"></div> 
      
         
         </div>
