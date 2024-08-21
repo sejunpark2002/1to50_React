@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-
-import "./style.css"
+import React, { useState,useRef,useEffect} from "react";
 import OuterBoard from "./OuterBoard"
 import Timer from "./Timer"
 import ScoreBoard from "./ScoreBoard";
@@ -8,6 +6,7 @@ import clickSound from './sound/carrot_pull.mp3';
 import bgSound from './sound/bg.mp3';
 import winSound from './sound/game_win.mp3';
 import bugSound from './sound/bug_pull.mp3';
+import "./style.css"
 
 
 
@@ -33,28 +32,36 @@ function OneToFifty() {
    
     const [numbers, setNumbers] = useState(array);
     const [gameFlag,setGameFlag] = useState(false);
-
-  
-   
     const [soundOn, setSoundOn] = useState(true);
     const [result, setResult] = useState("");
     const [gameOver,setGameOver] = useState(false);
-
-   
     const [current,setCurrent] = useState(1);
-
     const audioRef = useRef(null);
     const bgRef = useRef(null);
     const winRef = useRef(null);
     const bugRef = useRef(null);
-
-   
+    const [gameRecords, setGameRecords] = useState([]);
+  
+    function addGameRecord(newRecord) {
+      setGameRecords(prevRecords => {
+        const updatedRecords = [...prevRecords, newRecord];
+        localStorage.setItem('gameRecords', JSON.stringify(updatedRecords));
+    
+      });
+    }
+  
+    useEffect(() => {
+      const storedRecords = JSON.parse(localStorage.getItem('gameRecords'));
+      if (storedRecords) {
+        setGameRecords(storedRecords);
+      }
+    }, []);
 
     const handleClick = num => {
       
         if (num === current ) {
             audioRef.current.play(); 
-            if (num === 50 ) {
+            if (num === 2 ) {
                 endGame();
              }
 
@@ -109,7 +116,7 @@ function OneToFifty() {
         if (soundOn) { bgRef.current.play();}
         };
 
-    const showResult = (result) => {
+    const recordResult = (result) => {
         setResult(result);
     } 
     
@@ -128,14 +135,14 @@ return (
             <audio ref={winRef} src={winSound}></audio>
             <audio ref={bugRef} src={bugSound}></audio>
         
-        <h1 className="title">1to50</h1>     
-        <Timer gameOver={gameOver} gameFlag={gameFlag} showResult={showResult}  />
+        <h1 className={gameOver? 'btn-overlay ' : 'title'}>1to50</h1>     
+        <Timer gameOver={gameOver} gameFlag={gameFlag} recordResult={recordResult} addGameRecord={addGameRecord}  />
         <button  className={gameOver? 'btn-overlay ' : 'btn'} onClick={stopSound}>STOP MUSIC</button>
         <button className={gameOver? 'btn-overlay ' : 'btn'} onClick={reStart}>NEW GAME</button>
 
         <OuterBoard numbers={numbers} handleClick={handleClick} gameOver={gameOver} > </OuterBoard>
         {gameOver ? (
-        <ScoreBoard result={result} />
+        <ScoreBoard currentresult={result} />
       ) : (
         null
       )}
