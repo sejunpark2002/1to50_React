@@ -5,7 +5,7 @@ import "./style.css"
 function ScoreBoard({currentresult}) {
 
 
-  const storedRecords = JSON.parse(localStorage.getItem('gameRecords'));
+  const storedRecords = JSON.parse(window.localStorage.getItem('gameRecords')) || [];
 
   const reStart = () => {
     window.location.reload(false);
@@ -27,7 +27,7 @@ function ScoreBoard({currentresult}) {
 
      
     return (
-        <div className="Scoreboard">
+    
           <div className="Result">
            
             
@@ -48,13 +48,17 @@ function ScoreBoard({currentresult}) {
                </div>
 
             
-  
+             
                <button className="btn btn-playagain" onClick={reStart}>PLAY AGAIN</button>
+             
+      
             </div>
             
+            
         </div>
+        
            
-        </div>
+        
     );
 
 }

@@ -7,6 +7,7 @@ import bgSound from './sound/bg.mp3';
 import winSound from './sound/game_win.mp3';
 import bugSound from './sound/bug_pull.mp3';
 import "./style.css"
+import BuyMeACoffeeButton from './BuyMeACoffeeButton';
 
 
 
@@ -40,28 +41,19 @@ function OneToFifty() {
     const bgRef = useRef(null);
     const winRef = useRef(null);
     const bugRef = useRef(null);
-    const [gameRecords, setGameRecords] = useState([]);
-  
-    function addGameRecord(newRecord) {
-      setGameRecords(prevRecords => {
-        const updatedRecords = [...prevRecords, newRecord];
-        localStorage.setItem('gameRecords', JSON.stringify(updatedRecords));
-    
-      });
-    }
-  
-    useEffect(() => {
-      const storedRecords = JSON.parse(localStorage.getItem('gameRecords'));
-      if (storedRecords) {
-        setGameRecords(storedRecords);
-      }
-    }, []);
+
+    // useEffect(() => {
+    //   const storedRecords = JSON.parse(localStorage.getItem('gameRecords'));
+    //   if (storedRecords) {
+    //     setGameRecords(storedRecords);
+    //   }
+    // }, []);
 
     const handleClick = num => {
       
         if (num === current ) {
             audioRef.current.play(); 
-            if (num === 2 ) {
+            if (num === 50 ) {
                 endGame();
              }
 
@@ -118,6 +110,7 @@ function OneToFifty() {
 
     const recordResult = (result) => {
         setResult(result);
+        console.log(result)
     } 
     
 
@@ -134,22 +127,23 @@ return (
             <audio ref={audioRef} src={clickSound}></audio>
             <audio ref={winRef} src={winSound}></audio>
             <audio ref={bugRef} src={bugSound}></audio>
-        
-        <h1 className={gameOver? 'btn-overlay ' : 'title'}>1to50</h1>     
-        <Timer gameOver={gameOver} gameFlag={gameFlag} recordResult={recordResult} addGameRecord={addGameRecord}  />
-        <button  className={gameOver? 'btn-overlay ' : 'btn'} onClick={stopSound}>STOP MUSIC</button>
-        <button className={gameOver? 'btn-overlay ' : 'btn'} onClick={reStart}>NEW GAME</button>
+          
+         <div className='Game-Container'>
+            <h1 className={gameOver? 'btn-overlay ' : 'title'}>1to50</h1>     
+            <Timer gameOver={gameOver} gameFlag={gameFlag} recordResult={recordResult}  />
+            <button  className={gameOver? 'btn-overlay ' : 'btn'} onClick={stopSound}>STOP MUSIC</button>
+            <button className={gameOver? 'btn-overlay ' : 'btn'} onClick={reStart}>NEW GAME</button>
 
-        <OuterBoard numbers={numbers} handleClick={handleClick} gameOver={gameOver} > </OuterBoard>
-        {gameOver ? (
+            <OuterBoard numbers={numbers} handleClick={handleClick} gameOver={gameOver} > </OuterBoard>
+            {gameOver ? (
         <ScoreBoard currentresult={result} />
       ) : (
         null
       )}
-      <div class="sharethis-inline-share-buttons"></div> 
-     
-        
         </div>
+        <BuyMeACoffeeButton/>
+        
+      </div>
     )
 }
 
